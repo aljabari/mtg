@@ -1,7 +1,6 @@
-package com.aljabari.mtg.server;
+package com.aljabari.mtg.client.desktop;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
 
 /**
