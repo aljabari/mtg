@@ -8,8 +8,11 @@ import org.java_websocket.handshake.ServerHandshake;
 
 public class GameClient extends WebSocketClient {
 
-    public GameClient() throws URISyntaxException {
+    private Window window;
+
+    public GameClient(Window window) throws URISyntaxException {
         super(new URI("ws://localhost:5678"));
+        this.window = window;
     }
 
     @Override
@@ -20,12 +23,14 @@ public class GameClient extends WebSocketClient {
     @Override
     public void onMessage(String message) {
         System.out.println("received: " + message);
+        window.addMessage(message);
     }
 
     @Override
     public void onClose(int code, String reason, boolean remote) {
         // The close codes are documented in class org.java_websocket.framing.CloseFrame
         System.out.println("Connection closed by " + (remote ? "remote peer" : "us") + " Code: " + code + " Reason: " + reason);
+        window.addMessage("Connection closed by " + (remote ? "remote peer" : "us") + " Code: " + code + " Reason: " + reason);
     }
 
     @Override
